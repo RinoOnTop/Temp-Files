@@ -100,17 +100,17 @@ ${bold}${lightred}⛔️ Root running from FakeRoot + FakeRoot, do you know what
 ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ashu11a/proot:latest
         "
     fi
-    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+   
     echo "✅ Starting VPS"
     echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
-        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot  $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
