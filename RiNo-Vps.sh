@@ -22,8 +22,21 @@ redback=$(echo -en "\e[41m")
 
 echo "
 ${bold}${lightgreen}===================================================================================
+																								  
+																									 
+																									 
+																									 
+																									 
+																									 
+																									 
+																									 
+																									 
 ${bold}${lightblue} STARTING PLEASE WAIT ...=
+																									  
+																								  
+																												
 ${bold}${lightgreen}===================================================================================
+  
   
  "
 if [ -z "$INSTALL" ]; then
@@ -227,7 +240,7 @@ ${bold}${lightgreen}============================================================
  
  
     echo "${nc}"
-    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/Connect/pt-BR/vps/version.sh)
+																				  
     echo "${bold}${lightgreen}==> ${lightblue}Container ${lightgreen} Started <=="
     function runcmd1 {
         printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
