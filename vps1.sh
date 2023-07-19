@@ -224,7 +224,7 @@ ${bold}${lightgreen}============================================================
  
  
     echo "${nc}"
-    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+ 
     echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
     function runcmd1 {
         printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
