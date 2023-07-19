@@ -22,21 +22,20 @@ redback=$(echo -en "\e[41m")
 
 echo "
 ${bold}${lightgreen}===================================================================================
-																								  
-																									 
-																									 
-																									 
-																									 
-																									 
-																									 
-																									 
-																									 
-${bold}${lightblue} STARTING PLEASE WAIT ...=
-																									  
-																								  
-																												
+                                                                                                  
+${bold}${lightblue}@@@@@@@   @@@@@@@  @@@@@@@@  @@@@@@@    @@@@@@      @@@  @@@  @@@@@@@    @@@@@@   
+${bold}${lightblue}@@@@@@@@  @@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@     @@@  @@@  @@@@@@@@  @@@@@@@   
+${bold}${lightblue}@@!  @@@    @@!    @@!       @@!  @@@  @@!  @@@     @@!  @@@  @@!  @@@  !@@       
+${bold}${lightblue}!@!  @!@    !@!    !@!       !@!  @!@  !@!  @!@     !@!  @!@  !@!  @!@  !@!       
+${bold}${lightblue}@!@@!@!     @!!    @!!!:!    @!@!!@!   @!@  !@!     @!@  !@!  @!@@!@!   !!@@!!    
+${bold}${lightblue}!!@!!!      !!!    !!!!!:    !!@!@!    !@!  !!!     !@!  !!!  !!@!!!     !!@!!!   
+${bold}${lightblue}!!:         !!:    !!:       !!: :!!   !!:  !!!     :!:  !!:  !!:            !:!  
+${bold}${lightblue}:!:         :!:    :!:       :!:  !:!  :!:  !:!      ::!!:!   :!:           !:!   
+${bold}${lightblue} ::          ::     :: ::::  ::   :::  ::::: ::       ::::     ::       :::: ::   
+${bold}${lightblue} :           :     : :: ::    :   : :   : :  :         :       :        :: : :     
+                                                                                                  
+                                                                                                                
 ${bold}${lightgreen}===================================================================================
-  
   
  "
 if [ -z "$INSTALL" ]; then
@@ -103,19 +102,19 @@ if [[ -f "./libraries/instalado" ]]; then
     if [ "${PROOT}" = "PRoot-rs" ]; then
         echo "
 
-${bold}${lightred}⛔️  Root running using Porto-rs, do you know what you're doing?
+${bold}${lightred}⛔️  Root executado a partir do PRoot-rs, você sabe oque está fazendo?
         "
     fi
     if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
         echo "
 
-${bold}${lightred}⛔️ Root running from FakeRoot + FakeRoot, do you know what you're doing?
-${bold}${lightred}⛔️  To use this variable, you have to be using docker: ashu11a/proot:latest
+${bold}${lightred}⛔️  Root executado a partir do FakechRoot + FakeRoot, você sabe oque está fazendo?
+${bold}${lightred}⛔️  Para utilizar essa variável, você tem que estar usado o docker: ashu11a/proot:latest
         "
     fi
-    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/Connect/pt-BR/vps/version.sh)
-    echo "✅  Starting VPS"
-    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Starting <=="
+    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+    echo "✅  Iniciando VPS"
+    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Iniciado <=="
     function runcmd1 {
         printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
@@ -130,24 +129,24 @@ ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ash
     }
     runcmd
 else
-    echo "${bold}${lightblue}🔎 Architecture: 64x"
+    echo "${bold}${lightblue}🔎  Arquitetura Identificada: 64x"
     if [ $LINUX_ISO = "Ubuntu" ]; then
-    echo "${redback} THE UBUNTU DISTRO IS NOT WORKING AT THE MOMENT!!"
+    echo "${redback} A DISTRO UBUNTU NÃO ESTÁ FUNCIONADO NO MOMENTO!!"
     exit
     fi
     if [ $install = "1" ]; then
     echo  "
-📌 Variable: (Clean Install) 🟢 Enabled
-📌 The following packages will not be Installed: sudo wget hwloc htop nano neofetch ngrok gotty curl
+📌  Variavel: (Instalação Limpa) 🟢  Ativada
+📌  Os seguintes pacotes não serão Instalados: sudo wget hwloc htop nano neofetch ngrok gotty curl
     "
     else
-    echo  "${bold}${lightred}⚠️ Debian/Ubuntu distributions can take more than 15min to finish the installation."
-	 echo  "${bold}${lightred}⚠️ Configuring Your Server for the first time could take up to 15min , Please wait"
-	
+    echo  "${bold}${lightred}⚠️  Distribuições Debian/Ubuntu podem levar mais de 15min para terminar a instalação."
+																												  
+ 
     fi
-    echo "📥 Downloading Files for Your Server"
+    echo "📥  Baixando arquivos para instalação da vps"
     if [ -d libraries ]; then
-    echo "Libraries folder already exists, skipping..."
+    echo "Pasta libraries já existe, pulando..."
     else
     mkdir libraries
     fi
@@ -159,7 +158,7 @@ else
     curl -sSLo root.tar.xz $linux_iso >/dev/null 2>libraries/err.log
     echo  '##                  (10%)'
     if [ $LINUX_ISO = "Alpine" ]; then
-        echo  'Skipping Download files incompatible with Alpine.'
+        echo  'Pulando Download de arquivos incompatíveis com o Alpine.'
     else
         if [ $install = "0" ]; then
             curl -sSLo ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz >/dev/null 2>libraries/err.log
@@ -208,7 +207,7 @@ else
         echo  '############        (80%)'
     else
         if [ $install = "0" ]; then
-            echo  "${bold}${lightred}⚠️  This is the most time-consuming step, it can take up to 15 minutes to complete."
+            echo  "${bold}${lightred}⚠️  Essa é a etapa mais demorada, pode levar até 15min para termina-la"
         fi
     fi
 
@@ -234,14 +233,14 @@ ${bold}${lightblue} :           :     : :: ::    :   : :   : :  :         :     
                                                                                                   
                                                                                                                 
 
-${bold}${lightblue} STARTING PLEASE WAIT ...=
+											 
 ${bold}${lightgreen}===================================================================================
  "
  
  
     echo "${nc}"
-																				  
-    echo "${bold}${lightgreen}==> ${lightblue}Container ${lightgreen} Started <=="
+    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Iniciado <=="
     function runcmd1 {
         printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
