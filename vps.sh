@@ -160,14 +160,14 @@ else
     echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
 
     function runcmd1 {
-        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd
     }
 
     function runcmd {
-        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
