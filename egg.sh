@@ -64,15 +64,15 @@ ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ash
     fi
    
     echo "✅ Starting VPS"
-    echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
+    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
     function runcmd1 {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}pRoot${nc}@${lightblue}pterodactyl${nc}:~ "
         read -r cmdtorun
         $proot  $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}pRoot${nc}@${lightblue}pterodactyl${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
