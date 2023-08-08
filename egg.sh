@@ -47,11 +47,23 @@ else
         cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
         fi
     fi
- 
+    if [ $LINUX_ISO = "Alpine" ]; then
+        linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/alpine-x86_64-pd-v3.3.0.tar.xz"
+        bash=("/bin/ash -c")
+        if [ $install = "0" ]; then
+        cmds=("apk cache clean" "apk update" "apk upgrade" "apk add --upgrade sudo curl wget hwloc htop nano neofetch python3 unzip")
+        else
+        cmds=("apk cache clean" "apk update" "apk upgrade")
+        fi
+    fi
 fi
 
 console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
 
+echo "${nc}"
+
+  
+   
     echo "✅ Starting VPS"
     echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
