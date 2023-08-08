@@ -66,8 +66,18 @@ fi
         runcmd1
     }
     runcmd
-
+else
     echo "${bold}${lightblue}🔎   Architecture: 64x"
+    if [ $LINUX_ISO = "Ubuntu" ]; then
+    echo "${redback} THE UBUNTU DISTRO IS NOT WORKING AT THE MOMENT!"
+    exit
+    fi
+    if [ $install = "1" ]; then
+    echo  "
+📌 Variable: (Clean Install) 🟢 Enabled
+📌 The following packages will not be Installed: sudo wget hwloc htop nano neofetch ngrok gotty curl
+    "
+    else
     echo  "${bold}${lightred}⚠️ Debian/Ubuntu distributions can take more than 15min to finish the installation."
 																												  
  
