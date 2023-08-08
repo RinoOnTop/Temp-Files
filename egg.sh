@@ -85,9 +85,7 @@ fi
     echo  '#                   (5%)'
     curl -sSLo root.tar.xz $linux_iso >/dev/null 2>libraries/err.log
     echo  '##                  (10%)'
-    if [ $LINUX_ISO = "Alpine" ]; then
-        echo  'Incompatible with Alpine , Skipping ... '
-    else
+
         if [ $install = "0" ]; then
             curl -sSLo ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz >/dev/null 2>libraries/err.log
             echo  '####                (20%)'
