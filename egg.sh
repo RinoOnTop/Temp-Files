@@ -11,14 +11,7 @@ lightred=$(echo -en "\e[31m")
 redback=$(echo -en "\e[41m")
 
 echo "
-${bold}${lightgreen}===================================================================================
-
-
 ${bold}${lightblue} STARTING PLEASE WAIT ...
-
-
-${bold}${lightgreen}===================================================================================
-  
  "
 if [ -z "$INSTALL" ]; then
     install="0"
@@ -51,37 +44,12 @@ else
         cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
         fi
     fi
-    if [ $LINUX_ISO = "Alpine" ]; then
-        linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/alpine-x86_64-pd-v3.3.0.tar.xz"
-        bash=("/bin/ash -c")
-        if [ $install = "0" ]; then
-        cmds=("apk cache clean" "apk update" "apk upgrade" "apk add --upgrade sudo curl wget hwloc htop nano neofetch python3 unzip")
-        else
-        cmds=("apk cache clean" "apk update" "apk upgrade")
-        fi
-    fi
+   
 fi
 
 console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
 
-if [ -z "${PROOT}" ]; then
-    proot="./libraries/proot"
-fi
-if [ "${PROOT}" = "PRoot (padrão)" ]; then
-    proot="./libraries/proot"
-fi
-if [ "${PROOT}" = "PRoot-rs" ]; then
-    proot="./libraries/proot-rs"
-fi
-if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
-    proot="fakechroot fakeroot"
-fi
-
 echo "${nc}"
-
-if [[ -f "./libraries/instalado" ]]; then
-
-    if [ "${PROOT}" = "PRoot-rs" ]; then
         echo "
 
 ${bold}${lightred}⛔️ Root running using Porto-rs, do you know what you're doing?
