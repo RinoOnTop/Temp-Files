@@ -2,7 +2,6 @@
 HOME="/home/container"
 HOMEA="$HOME/linux/.apt"
 export BUILD_DIR=$HOMEA
-LINUX_ISO=Ubuntu
 bold=$(echo -en "\e[1m")
 nc=$(echo -en "\e[0m")
 lightblue=$(echo -en "\e[94m")
