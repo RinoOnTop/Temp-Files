@@ -12,7 +12,7 @@ redback=$(echo -en "\e[41m")
 
 echo "
 ${bold}${lightgreen}===================================================================================
-${bold}${lightblue} STARTING PLEASE WAIT ...=
+${bold}${lightblue} STARTING PLEASE WAIT ...
 ${bold}${lightgreen}===================================================================================
   
  "
