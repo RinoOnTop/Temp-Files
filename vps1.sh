@@ -2,7 +2,7 @@
 HOME="/home/container"
 HOMEA="$HOME/linux/.apt"
 export BUILD_DIR=$HOMEA
-
+LINUX_ISO=Ubuntu
 bold=$(echo -en "\e[1m")
 nc=$(echo -en "\e[0m")
 lightblue=$(echo -en "\e[94m")
@@ -12,24 +12,18 @@ redback=$(echo -en "\e[41m")
 
 echo "
 ${bold}${lightgreen}===================================================================================
-${bold}${lightblue} STARTING PLEASE WAIT ...=
+
+
+
+${bold}${lightblue} STARTING PLEASE WAIT ...
+
+
+
 ${bold}${lightgreen}===================================================================================
   
  "
-if [ -z "$INSTALL" ]; then
-    install="0"
-else
-    install="$INSTALL"
-fi
 
-if [ -z "$LINUX_ISO" ]; then
-    linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
-    bash=("/bin/bash -c")
-    if [ -z "$INSTALL" ]; then
-        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
-    fi
-else
-    if [ $LINUX_ISO = "Debian" ]; then
+    if [ $LINUX_ISO = "DEBIAN" ]; then
         linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
         bash=("/bin/bash -c")
     if [ $install = "0" ]; then
