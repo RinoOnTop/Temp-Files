@@ -11,7 +11,10 @@ lightred=$(echo -en "\e[31m")
 redback=$(echo -en "\e[41m")
 
 echo "
-${bold}${lightblue} STARTING PLEASE WAIT ...
+${bold}${lightgreen}===================================================================================
+${bold}${lightblue} STARTING PLEASE WAIT ...=
+${bold}${lightgreen}===================================================================================
+  
  "
 if [ -z "$INSTALL" ]; then
     install="0"
@@ -44,29 +47,38 @@ else
         cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
         fi
     fi
-   
+ 
 fi
 
 console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
 
-echo "${nc}"
-        echo "
-
     echo "✅ Starting VPS"
-    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
+    echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}pterodactyl${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot  $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}pterodactyl${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
     }
     runcmd
+else
+    echo "${bold}${lightblue}🔎   Architecture: 64x"
+    if [ $LINUX_ISO = "Ubuntu" ]; then
+    echo "${redback} THE UBUNTU DISTRO IS NOT WORKING AT THE MOMENT!"
+    exit
+    fi
+    if [ $install = "1" ]; then
+    echo  "
+📌 Variable: (Clean Install) 🟢 Enabled
+📌 The following packages will not be Installed: sudo wget hwloc htop nano neofetch ngrok gotty curl
+    "
+    else
     echo  "${bold}${lightred}⚠️ Debian/Ubuntu distributions can take more than 15min to finish the installation."
 																												  
  
@@ -84,7 +96,15 @@ echo "${nc}"
     echo  '#                   (5%)'
     curl -sSLo root.tar.xz $linux_iso >/dev/null 2>libraries/err.log
     echo  '##                  (10%)'
-   
+    if [ $LINUX_ISO = "Alpine" ]; then
+        echo  'Incompatible with Alpine , Skipping ... '
+    else
+        if [ $install = "0" ]; then
+            curl -sSLo ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz >/dev/null 2>libraries/err.log
+            echo  '####                (20%)'
+            curl -sSLo gotty.tar.gz https://github.com/sorenisanerd/gotty/releases/download/v1.5.0/gotty_v1.5.0_linux_amd64.tar.gz >/dev/null 2>libraries/err.log
+        fi
+    fi
     echo  '#####               (25%)'
     export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:$HOMEA/bin:$HOMEA/usr/bin:$HOMEA/sbin:$HOMEA/usr/sbin:$HOMEA/etc/init.d:$PATH"
     echo  '######              (30%)'
@@ -117,7 +137,14 @@ echo "${nc}"
     rm -rf gotty.tar.gz >/dev/null 2>libraries/err.log
     rm -rf ngrok.tgz >/dev/null 2>libraries/err.log
     echo  '############        (60%)'
-  
+    if [ $LINUX_ISO = "Alpine" ]; then
+        chmod -R 775 alpine-x86_64
+        mv alpine-x86_64/* ./
+        rm -r alpine-x86_64
+    fi
+    if [ $LINUX_ISO = "Alpine" ]; then
+        echo  '############        (80%)'
+    else
         if [ $install = "0" ]; then
             echo  "${bold}${lightred}⚠️ This is the most time-consuming step, it can take up to 15 minutes to complete."
         fi
