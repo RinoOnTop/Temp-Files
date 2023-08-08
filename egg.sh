@@ -94,13 +94,13 @@ ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ash
     echo "✅ Starting VPS"
     echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot  $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
@@ -217,13 +217,13 @@ ${bold}${lightgreen}============================================================
  
     echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
     function runcmd1 {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightred}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
