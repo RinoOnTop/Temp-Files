@@ -40,21 +40,12 @@ if [ -z "$LINUX_ISO" ]; then
 
 else
     if [ $LINUX_ISO = "Debian" ]; then
-        linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
-        bash=("/bin/bash -c")
-    if [ $install = "0" ]; then
-        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
-        else
-        cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
-        fi
-    fi
-    if [ $LINUX_ISO = "Ubuntu" ]; then
-        linux_iso="https://partner-images.canonical.com/core/bionic/current/ubuntu-bionic-core-cloudimg-amd64-root.tar.gz"
-        bash=("/bin/bash -c")
+       linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/alpine-x86_64-pd-v3.3.0.tar.xz"
+        bash=("/bin/ash -c")
         if [ $install = "0" ]; then
-        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "rm -rf /etc/apt/trusted.gpg.d/*" "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
+        cmds=("apk cache clean" "apk update" "apk upgrade" "apk add --upgrade sudo curl wget hwloc htop nano neofetch python3 unzip")
         else
-        cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
+        cmds=("apk cache clean" "apk update" "apk upgrade")
         fi
     fi
     if [ $LINUX_ISO = "Alpine" ]; then
