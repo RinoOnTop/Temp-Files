@@ -1,5 +1,6 @@
 #!/bin/bash
 HOME="/home/container"
+$LINUX_ISO = "Alpine"
 HOMEA="$HOME/linux/.apt"
 STAR1="$HOMEA/lib:$HOMEA/usr/lib:$HOMEA/var/lib:$HOMEA/usr/lib/x86_64-linux-gnu:$HOMEA/lib/x86_64-linux-gnu:$HOMEA/lib:$HOMEA/usr/lib/sudo"
 STAR2="$HOMEA/usr/include/x86_64-linux-gnu:$HOMEA/usr/include/x86_64-linux-gnu/bits:$HOMEA/usr/include/x86_64-linux-gnu/gnu"
@@ -87,18 +88,6 @@ ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ash
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
-    }
     runcmd
 else
     echo "${bold}${lightblue}🔎   Architecture: 64x"
