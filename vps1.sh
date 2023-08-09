@@ -30,11 +30,14 @@ else
     install="$INSTALL"
 fi
 if [ -z "$LINUX_ISO" ]; then
-    linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
-    bash=("/bin/bash -c")
-    if [ -z "$INSTALL" ]; then
-        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
-    fi
+   linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/alpine-x86_64-pd-v3.3.0.tar.xz"
+        bash=("/bin/ash -c")
+        if [ $install = "0" ]; then
+        cmds=("apk cache clean" "apk update" "apk upgrade" "apk add --upgrade sudo curl wget hwloc htop nano neofetch python3 unzip")
+        else
+        cmds=("apk cache clean" "apk update" "apk upgrade")
+        fi
+
 else
     if [ $LINUX_ISO = "Debian" ]; then
         linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
