@@ -9,10 +9,10 @@ STAR5="$HOMEA/usr/lib/x86_64-linux-gnu/gtk-2.0/modules:$HOMEA/usr/lib/x86_64-lin
 STAR6="$HOMEA/usr/lib/x86_64-linux-gnu/samba/:$HOMEA/usr/lib/x86_64-linux-gnu/pulseaudio:$HOMEA/usr/lib/x86_64-linux-gnu/blas:$HOMEA/usr/lib/x86_64-linux-gnu/blis-serial"
 STAR7="$HOMEA/usr/lib/x86_64-linux-gnu/blis-openmp:$HOMEA/usr/lib/x86_64-linux-gnu/atlas:$HOMEA/usr/lib/x86_64-linux-gnu/tracker-miners-2.0:$HOMEA/usr/lib/x86_64-linux-gnu/tracker-2.0:$HOMEA/usr/lib/x86_64-linux-gnu/lapack:$HOMEA/usr/lib/x86_64-linux-gnu/gedit"
 STARALL="$STAR1:$STAR2:$STAR3:$STAR4:$STAR5:$STAR6:$STAR7"
+LINUX_ISO = Alpine
 export LD_LIBRARY_PATH=$STARALL
 export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:$HOMEA/bin:$HOMEA/usr/bin:$HOMEA/sbin:$HOMEA/usr/sbin:$HOMEA/etc/init.d:$PATH"
 export BUILD_DIR=$HOMEA
-LINUX_ISO = Alpine
 bold=$(echo -en "\e[1m")
 nc=$(echo -en "\e[0m")
 lightblue=$(echo -en "\e[94m")
@@ -25,14 +25,34 @@ ${bold}${lightblue} STARTING PLEASE WAIT ...=
 ${bold}${lightgreen}===================================================================================
   
  "
-
+if [ -z "$INSTALL" ]; then
+    install="0"
+else
+    install="$INSTALL"
+fi
 if [ -z "$LINUX_ISO" ]; then
-   linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/alpine-x86_64-pd-v3.3.0.tar.xz"
-        bash=("/bin/ash -c")
-        if [ $install = "0" ]; then
-        cmds=("apk cache clean" "apk update" "apk upgrade" "apk add --upgrade sudo curl wget hwloc htop nano neofetch python3 unzip")
+    linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
+    bash=("/bin/bash -c")
+    if [ -z "$INSTALL" ]; then
+        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
+    fi
+else
+    if [ $LINUX_ISO = "Debian" ]; then
+        linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
+        bash=("/bin/bash -c")
+    if [ $install = "0" ]; then
+        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
         else
-        cmds=("apk cache clean" "apk update" "apk upgrade")
+        cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
+        fi
+    fi
+    if [ $LINUX_ISO = "Ubuntu" ]; then
+        linux_iso="https://partner-images.canonical.com/core/bionic/current/ubuntu-bionic-core-cloudimg-amd64-root.tar.gz"
+        bash=("/bin/bash -c")
+        if [ $install = "0" ]; then
+        cmds=("mv gotty /usr/bin/" "mv unzip /usr/bin/" "mv ngrok /usr/bin/" "apt clean" "rm -rf /etc/apt/trusted.gpg.d/*" "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32" "apt-get update" "apt-get -y upgrade" "apt-get -y install sudo curl wget hwloc htop nano neofetch python3")
+        else
+        cmds=("apt clean" "apt-get update" "apt-get -y upgrade" "apt-get -y install python3")
         fi
     fi
     if [ $LINUX_ISO = "Alpine" ]; then
@@ -45,6 +65,33 @@ if [ -z "$LINUX_ISO" ]; then
         fi
     fi
 fi
+console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
+if [ -z "${PROOT}" ]; then
+    proot="./libraries/proot"
+fi
+if [ "${PROOT}" = "PRoot (padrão)" ]; then
+    proot="./libraries/proot"
+fi
+if [ "${PROOT}" = "PRoot-rs" ]; then
+    proot="./libraries/proot-rs"
+fi
+if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
+    proot="fakechroot fakeroot"
+fi
+echo "${nc}"
+if [[ -f "./libraries/instalado" ]]; then
+    if [ "${PROOT}" = "PRoot-rs" ]; then
+        echo "
+${bold}${lightred}⛔️ Root running using Porto-rs, do you know what you're doing?
+        "
+    fi
+    if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
+        echo "
+${bold}${lightred}⛔️ Root running from FakeRoot + FakeRoot, do you know what you're doing?
+${bold}${lightred}⛔️  To use this variable, you have to be using docker: ashu11a/proot:latest
+        "
+    fi
+
     echo "✅ Starting VPS"
     echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
@@ -57,7 +104,18 @@ fi
         printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
-        runcmd1 
+        runcmd1
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     }
     runcmd
 else
