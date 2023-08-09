@@ -1,15 +1,23 @@
 #!/bin/bash
 HOME="/home/container"
 HOMEA="$HOME/linux/.apt"
+STAR1="$HOMEA/lib:$HOMEA/usr/lib:$HOMEA/var/lib:$HOMEA/usr/lib/x86_64-linux-gnu:$HOMEA/lib/x86_64-linux-gnu:$HOMEA/lib:$HOMEA/usr/lib/sudo"
+STAR2="$HOMEA/usr/include/x86_64-linux-gnu:$HOMEA/usr/include/x86_64-linux-gnu/bits:$HOMEA/usr/include/x86_64-linux-gnu/gnu"
+STAR3="$HOMEA/usr/share/lintian/overrides/:$HOMEA/usr/src/glibc/debian/:$HOMEA/usr/src/glibc/debian/debhelper.in:$HOMEA/usr/lib/mono"
+STAR4="$HOMEA/usr/src/glibc/debian/control.in:$HOMEA/usr/lib/x86_64-linux-gnu/libcanberra-0.30:$HOMEA/usr/lib/x86_64-linux-gnu/libgtk2.0-0"
+STAR5="$HOMEA/usr/lib/x86_64-linux-gnu/gtk-2.0/modules:$HOMEA/usr/lib/x86_64-linux-gnu/gtk-2.0/2.10.0/immodules:$HOMEA/usr/lib/x86_64-linux-gnu/gtk-2.0/2.10.0/printbackends"
+STAR6="$HOMEA/usr/lib/x86_64-linux-gnu/samba/:$HOMEA/usr/lib/x86_64-linux-gnu/pulseaudio:$HOMEA/usr/lib/x86_64-linux-gnu/blas:$HOMEA/usr/lib/x86_64-linux-gnu/blis-serial"
+STAR7="$HOMEA/usr/lib/x86_64-linux-gnu/blis-openmp:$HOMEA/usr/lib/x86_64-linux-gnu/atlas:$HOMEA/usr/lib/x86_64-linux-gnu/tracker-miners-2.0:$HOMEA/usr/lib/x86_64-linux-gnu/tracker-2.0:$HOMEA/usr/lib/x86_64-linux-gnu/lapack:$HOMEA/usr/lib/x86_64-linux-gnu/gedit"
+STARALL="$STAR1:$STAR2:$STAR3:$STAR4:$STAR5:$STAR6:$STAR7"
+export LD_LIBRARY_PATH=$STARALL
+export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:$HOMEA/bin:$HOMEA/usr/bin:$HOMEA/sbin:$HOMEA/usr/sbin:$HOMEA/etc/init.d:$PATH"
 export BUILD_DIR=$HOMEA
-
 bold=$(echo -en "\e[1m")
 nc=$(echo -en "\e[0m")
 lightblue=$(echo -en "\e[94m")
 lightgreen=$(echo -en "\e[92m")
 lightred=$(echo -en "\e[31m")
 redback=$(echo -en "\e[41m")
-
 echo "
 ${bold}${lightgreen}===================================================================================
 ${bold}${lightblue} STARTING PLEASE WAIT ...=
@@ -21,7 +29,6 @@ if [ -z "$INSTALL" ]; then
 else
     install="$INSTALL"
 fi
-
 if [ -z "$LINUX_ISO" ]; then
     linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
     bash=("/bin/bash -c")
@@ -57,9 +64,7 @@ else
         fi
     fi
 fi
-
 console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
-
 if [ -z "${PROOT}" ]; then
     proot="./libraries/proot"
 fi
@@ -72,25 +77,20 @@ fi
 if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
     proot="fakechroot fakeroot"
 fi
-
 echo "${nc}"
-
 if [[ -f "./libraries/instalado" ]]; then
-
     if [ "${PROOT}" = "PRoot-rs" ]; then
         echo "
-
 ${bold}${lightred}⛔️ Root running using Porto-rs, do you know what you're doing?
         "
     fi
     if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
         echo "
-
 ${bold}${lightred}⛔️ Root running from FakeRoot + FakeRoot, do you know what you're doing?
 ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ashu11a/proot:latest
         "
     fi
-   
+
     echo "✅ Starting VPS"
     echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
     function runcmd1 {
@@ -104,6 +104,17 @@ ${bold}${lightred}⛔️  To use this variable, you have to be using docker: ash
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     }
     runcmd
 else
@@ -188,7 +199,6 @@ else
             echo  "${bold}${lightred}⚠️ This is the most time-consuming step, it can take up to 15 minutes to complete."
         fi
     fi
-
     for cmd in "${cmds[@]}"; do
         $proot $console $bash "$cmd >/dev/null 2>libraries/err.log"
     done
@@ -217,13 +227,13 @@ ${bold}${lightgreen}============================================================
  
     echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
     function runcmd1 {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightred}pRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
