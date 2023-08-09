@@ -12,15 +12,29 @@ STARALL="$STAR1:$STAR2:$STAR3:$STAR4:$STAR5:$STAR6:$STAR7"
 export LD_LIBRARY_PATH=$STARALL
 export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:$HOMEA/bin:$HOMEA/usr/bin:$HOMEA/sbin:$HOMEA/usr/sbin:$HOMEA/etc/init.d:$PATH"
 export BUILD_DIR=$HOMEA
+
 bold=$(echo -en "\e[1m")
 nc=$(echo -en "\e[0m")
 lightblue=$(echo -en "\e[94m")
 lightgreen=$(echo -en "\e[92m")
 lightred=$(echo -en "\e[31m")
 redback=$(echo -en "\e[41m")
+
 echo "
 ${bold}${lightgreen}===================================================================================
-${bold}${lightblue} STARTING PLEASE WAIT ...=
+                                                                                                  
+${bold}${lightblue}@@@@@@@   @@@@@@@  @@@@@@@@  @@@@@@@    @@@@@@      @@@  @@@  @@@@@@@    @@@@@@   
+${bold}${lightblue}@@@@@@@@  @@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@     @@@  @@@  @@@@@@@@  @@@@@@@   
+${bold}${lightblue}@@!  @@@    @@!    @@!       @@!  @@@  @@!  @@@     @@!  @@@  @@!  @@@  !@@       
+${bold}${lightblue}!@!  @!@    !@!    !@!       !@!  @!@  !@!  @!@     !@!  @!@  !@!  @!@  !@!       
+${bold}${lightblue}@!@@!@!     @!!    @!!!:!    @!@!!@!   @!@  !@!     @!@  !@!  @!@@!@!   !!@@!!    
+${bold}${lightblue}!!@!!!      !!!    !!!!!:    !!@!@!    !@!  !!!     !@!  !!!  !!@!!!     !!@!!!   
+${bold}${lightblue}!!:         !!:    !!:       !!: :!!   !!:  !!!     :!:  !!:  !!:            !:!  
+${bold}${lightblue}:!:         :!:    :!:       :!:  !:!  :!:  !:!      ::!!:!   :!:           !:!   
+${bold}${lightblue} ::          ::     :: ::::  ::   :::  ::::: ::       ::::     ::       :::: ::   
+${bold}${lightblue} :           :     : :: ::    :   : :   : :  :         :       :        :: : :     
+                                                                                                  
+                                                                                                                
 ${bold}${lightgreen}===================================================================================
   
  "
@@ -29,6 +43,7 @@ if [ -z "$INSTALL" ]; then
 else
     install="$INSTALL"
 fi
+
 if [ -z "$LINUX_ISO" ]; then
     linux_iso="https://github.com/termux/proot-distro/releases/download/v3.3.0/debian-x86_64-pd-v3.3.0.tar.xz"
     bash=("/bin/bash -c")
@@ -64,7 +79,9 @@ else
         fi
     fi
 fi
+
 console=$([ "${CONSOLE}" == "1" ] && echo "${CONSOLE_OCC}" || echo "-0 -r . -b /dev -b /proc -b /sys -w / -b .")
+
 if [ -z "${PROOT}" ]; then
     proot="./libraries/proot"
 fi
@@ -77,65 +94,57 @@ fi
 if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
     proot="fakechroot fakeroot"
 fi
+
 echo "${nc}"
+
 if [[ -f "./libraries/instalado" ]]; then
+
     if [ "${PROOT}" = "PRoot-rs" ]; then
         echo "
-${bold}${lightred}⛔️ Root running using Porto-rs, do you know what you're doing?
+${bold}${lightred}⛔️  Root executado a partir do PRoot-rs, você sabe oque está fazendo?
         "
     fi
     if [ "${PROOT}" = "FakechRoot + FakeRoot" ]; then
         echo "
-${bold}${lightred}⛔️ Root running from FakeRoot + FakeRoot, do you know what you're doing?
-${bold}${lightred}⛔️  To use this variable, you have to be using docker: ashu11a/proot:latest
+${bold}${lightred}⛔️  Root executado a partir do FakechRoot + FakeRoot, você sabe oque está fazendo?
+${bold}${lightred}⛔️  Para utilizar essa variável, você tem que estar usado o docker: ashu11a/proot:latest
         "
     fi
-
-    echo "✅ Starting VPS"
-    echo "${bold}${lightgreen}==> ${lightblue}Starting${lightgreen} Container <=="
+    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+    echo "✅  Iniciando VPS"
+    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Iniciado <=="
     function runcmd1 {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot  $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     }
     runcmd
 else
-    echo "${bold}${lightblue}🔎   Architecture: 64x"
+    echo "${bold}${lightblue}🔎  Arquitetura Identificada: 64x"
     if [ $LINUX_ISO = "Ubuntu" ]; then
-    echo "${redback} THE UBUNTU DISTRO IS NOT WORKING AT THE MOMENT!"
+    echo "${redback} A DISTRO UBUNTU NÃO ESTÁ FUNCIONADO NO MOMENTO!!"
     exit
     fi
     if [ $install = "1" ]; then
     echo  "
-📌 Variable: (Clean Install) 🟢 Enabled
-📌 The following packages will not be Installed: sudo wget hwloc htop nano neofetch ngrok gotty curl
+📌  Variavel: (Instalação Limpa) 🟢  Ativada
+📌  Os seguintes pacotes não serão Instalados: sudo wget hwloc htop nano neofetch ngrok gotty curl
     "
     else
-    echo  "${bold}${lightred}⚠️ Debian/Ubuntu distributions can take more than 15min to finish the installation."
-																												  
- 
+    echo  "${bold}${lightred}⚠️  Distribuições Debian/Ubuntu podem levar mais de 15min para terminar a instalação."
+
+
     fi
-    echo "📥  Downloading Files for Your Server"
+    echo "📥  Baixando arquivos para instalação da vps"
     if [ -d libraries ]; then
-    echo "Libraries folder already exists, skipping..."
+    echo "Pasta libraries já existe, pulando..."
     else
     mkdir libraries
     fi
@@ -147,7 +156,7 @@ else
     curl -sSLo root.tar.xz $linux_iso >/dev/null 2>libraries/err.log
     echo  '##                  (10%)'
     if [ $LINUX_ISO = "Alpine" ]; then
-        echo  'Incompatible with Alpine , Skipping ... '
+        echo  'Pulando Download de arquivos incompatíveis com o Alpine.'
     else
         if [ $install = "0" ]; then
             curl -sSLo ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz >/dev/null 2>libraries/err.log
@@ -196,15 +205,16 @@ else
         echo  '############        (80%)'
     else
         if [ $install = "0" ]; then
-            echo  "${bold}${lightred}⚠️ This is the most time-consuming step, it can take up to 15 minutes to complete."
+            echo  "${bold}${lightred}⚠️  Essa é a etapa mais demorada, pode levar até 15min para termina-la"
         fi
     fi
+
     for cmd in "${cmds[@]}"; do
         $proot $console $bash "$cmd >/dev/null 2>libraries/err.log"
     done
     echo  '####################(100%)'
     touch ./libraries/instalado
-    
+
     echo "
 ${bold}${lightgreen}===================================================================================
                                                                                                   
@@ -218,22 +228,24 @@ ${bold}${lightblue}!!:         !!:    !!:       !!: :!!   !!:  !!!     :!:  !!: 
 ${bold}${lightblue}:!:         :!:    :!:       :!:  !:!  :!:  !:!      ::!!:!   :!:              :!:      
 ${bold}${lightblue} ::          ::     :: ::::  ::   :::  ::::: ::       ::::    :::          :::::::     
 ${bold}${lightblue} :           :     : :: ::    :   : :   : :  :         :      :::        :::::::         
-                                                                                                				 
+                                                                                                  
+                                                                                                                
+											 
 ${bold}${lightgreen}===================================================================================
  "
- 
- 
+
+
     echo "${nc}"
- 
-    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Started <=="
+    bash <(curl -s https://raw.githubusercontent.com/Ashu11-A/Ashu_eggs/main/vps/version.sh)
+    echo "${bold}${lightgreen}==> ${lightblue}Container${lightgreen} Iniciado <=="
     function runcmd1 {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd
     }
     function runcmd {
-        printf "${bold}${lightgreen}vRoot${nc}@${lightblue}Container${nc}:~ "
+        printf "${bold}${lightgreen}Default${nc}@${lightblue}Container${nc}:~ "
         read -r cmdtorun
         $proot $console $bash "$cmdtorun"
         runcmd1
